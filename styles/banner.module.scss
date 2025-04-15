@@ -1,0 +1,205 @@
+@import './variables';
+
+.banner {
+	width: 100%;
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	justify-content: center;
+	min-height: 830px;
+	z-index: 2;
+
+	@include desktop {
+		min-height: 700px;
+	}
+
+	@include tablet {
+		min-height: 600px;
+	}
+
+	@include tablet-down {
+		min-height: 500px;
+	}
+
+	&::after {
+		content: '';
+		position: absolute;
+		width: 100%;
+		height: 100%;
+		top: 0;
+		left: 0;
+		background-color: $black;
+		opacity: 0.6;
+		z-index: 0;
+	}
+
+	.bg_video {
+		position: absolute;
+		width: 100%;
+		height: 100%;
+		top: 0;
+		left: 0;
+
+		img {
+			width: 100%;
+		}
+
+		video {
+			width: 100%;
+			height: 100%;
+			object-fit: cover;
+		}
+	}
+
+	.icon_wrapper {
+		position: absolute;
+		top: 50%;
+		right: 0;
+		transform: translate(0, -50%);
+		z-index: 5;
+		padding: 10px 10px 10px 12px;
+		background-color: $white;
+		font-size: 0;
+
+		@include tablet-down {
+			display: flex;
+			top: auto;
+			bottom: 40px;
+			right: auto;
+			left: 50%;
+			transform: translate(-50%, 0);
+			background-color: transparent;
+		}
+	}
+
+	.icon_wrap {
+		position: relative;
+		margin-bottom: 5px;
+		max-width: 45px;
+		max-height: 45px;
+
+		&:last-child {
+			margin-bottom: 0;
+		}
+
+		svg {
+			g {
+				transition: fill 0.1s ease-in-out;
+			}
+		}
+
+		&:hover {
+			svg {
+				g {
+					fill: $bostonBlue;
+				}
+			}
+		}
+	}
+
+	.intro {
+		text-align: center;
+		position: relative;
+		z-index: 1;
+
+		h3 {
+			color: $white;
+			margin-bottom: 20px;
+		}
+
+		h2 {
+			color: $white;
+			margin-bottom: 20px;
+		}
+		h1 {
+			@include container-up {
+				font-size: 63px;
+			}
+
+			color: $atlantisGreen;
+		}
+	}
+	&.banner_second {
+		min-height: 500px;
+	}
+	.slidingVertical {
+		display: inline;
+		text-indent: 8px;
+		h1 {
+			animation: topToBottom linear infinite 0s;
+			-ms-animation: topToBottom linear infinite 0s;
+			-webkit-animation: topToBottom linear infinite 0s;
+			opacity: 0;
+			width: 100%;
+			display: block;
+			position: absolute;
+			font-size: 63px;
+			line-height: 1;
+			font-weight: 800;
+			color: $atlantisGreen;
+			font-family: $font-family;
+		}
+		span {
+			animation: topToBottom linear infinite 0s;
+			-ms-animation: topToBottom linear infinite 0s;
+			-webkit-animation: topToBottom linear infinite 0s;
+			opacity: 0;
+			width: 100%;
+			display: block;
+			position: absolute;
+			font-size: 63px;
+			line-height: 1;
+			font-weight: 800;
+			color: $atlantisGreen;
+			font-family: $font-family;
+
+			@include desktop {
+				font-size: 56px;
+			}
+
+			@include desktop-down {
+				font-size: 48px;
+			}
+
+			@include tablet-down {
+				font-size: 44px;
+			}
+
+			@include phone-down {
+				font-size: 38px;
+			}
+		}
+	}
+	// /*topToBottom Animation*/
+	@keyframes topToBottom {
+		0% {
+			opacity: 0;
+		}
+		5% {
+			opacity: 0;
+			transform: translateY(-50px);
+			-webkit-transform: translateY(-50px);
+		}
+		10% {
+			opacity: 1;
+			transform: translateY(0px);
+			-webkit-transform: translateY(0px);
+		}
+		25% {
+			opacity: 1;
+			transform: translateY(0px);
+			-webkit-transform: translateY(0px);
+		}
+		30% {
+			opacity: 0;
+			transform: translateY(50px);
+			-webkit-transform: translateY(50px);
+		}
+		80% {
+			opacity: 0;
+		}
+		100% {
+			opacity: 0;
+		}
+	}
+}

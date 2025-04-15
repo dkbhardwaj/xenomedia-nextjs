@@ -1,0 +1,20 @@
+name: drupalnext
+env_file: .env.development.local
+
+services:
+  node:
+    type: node:14
+    port: 3001
+    command: npm run dev
+
+proxy:
+  node:
+    - drupalnext.lndo.site:3000
+
+tooling:
+  yarn:
+    service: node
+  node:
+    service: node
+  npm:
+    service: node

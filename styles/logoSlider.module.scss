@@ -1,0 +1,188 @@
+@import './variables';
+
+.logo_slider {
+	@include desktop-down {
+		padding-bottom: 40px;
+	}
+
+	&::after {
+		content: '';
+		position: absolute;
+		width: 100%;
+		height: 100%;
+		top: 0;
+		left: 0;
+		background: linear-gradient(
+			180deg,
+			rgba(87, 87, 87, 1) -1%,
+			rgba(87, 87, 87, 0.024247198879551846) 88%
+		);
+		opacity: 0.4;
+		z-index: -1;
+	}
+
+	.col_two_wrapper {
+		position: relative;
+		width: 100%;
+		display: flex;
+		flex-wrap: wrap;
+		align-items: center;
+		@include tablet-down {
+			padding-top: 0;
+		}
+
+		.pattern {
+			position: absolute;
+			width: 1264px;
+			height: 425px;
+			top: -60px;
+			z-index: -1;
+			left: -55px;
+			font-size: 0;
+
+			@include desktop-down {
+				display: none;
+			}
+
+			&.detail_page {
+				top: -30px;
+				// left: -106px;
+			}
+
+			svg {
+				width: 100%;
+				height: 100%;
+				display: block;
+				opacity: 0;
+				transition: opacity 0.2s ease;
+
+				&.anim {
+					opacity: 1;
+
+					.fadein {
+						opacity: 0;
+						animation-delay: 0.6s;
+
+						&.cross {
+							animation-delay: 0.8s;
+						}
+					}
+
+					.go_anim {
+						stroke-width: 5;
+						stroke-dasharray: 110%;
+						stroke-dashoffset: 110%;
+						animation-duration: 2s;
+						animation-delay: 0.9s;
+
+						&.line_2 {
+							animation-delay: 1.3s;
+							animation-duration: 1.8s;
+						}
+
+						&.line_3 {
+							animation-duration: 1.8s;
+							animation-delay: 1.5s;
+							stroke-dasharray: 148%;
+							stroke-dashoffset: 148%;
+						}
+					}
+				}
+			}
+		}
+	}
+
+	.col_left {
+		position: relative;
+		width: 100%;
+		max-width: 300px;
+
+		h2 {
+			color: $grey;
+			margin: 0;
+			font-size: 56px;
+			@include desktop {
+				font-size: 50px;
+			}
+
+			@include tablet {
+				font-size: 36px;
+			}
+
+			@include tablet-down {
+				font-size: 30px;
+			}
+		}
+
+		@include desktop-down {
+			margin-bottom: 30px;
+		}
+	}
+
+	.col_right {
+		position: relative;
+		width: calc(100% - 415px);
+		margin: 0 0 0 115px;
+
+		@include laptop {
+			margin: 0 0 0 80px;
+		}
+
+		@include desktop-tablet-mid {
+			margin: 0 0 0 80px;
+		}
+
+		@include desktop-mid {
+			margin: 0 0 0 80px;
+		}
+
+		@include desktop-down {
+			width: 100%;
+			padding: 0 70px;
+			margin: auto;
+		}
+	}
+
+	.slider_wrap {
+		position: relative;
+		width: 100%;
+		margin: auto;
+
+		.slider_card {
+			position: relative;
+			margin: 0 10px;
+
+			.image_wrap {
+				max-width: 180px;
+				width: 100%;
+				position: relative;
+				max-height: 150px;
+				height: 150px;
+				margin: 0 auto;
+				overflow: hidden;
+
+				img {
+					width: 100%;
+					height: 100%;
+					object-fit: contain;
+				}
+
+				@include phablet-down {
+					max-width: 140px;
+					max-height: 120px;
+					height: 120px;
+				}
+			}
+		}
+		
+	}
+	
+
+	.btn_wrap {
+		margin-top: 50px;
+		text-align: right;
+		@include desktop-down{
+			text-align: left;
+		}
+	}
+}

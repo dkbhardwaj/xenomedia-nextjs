@@ -1,0 +1,56 @@
+@import './variables';
+.colTwoImage {
+	.row {
+		position: relative;
+		width: calc(100% + 20px);
+		margin-left: -10px;
+        display: flex;
+        @include tablet-down{
+            flex-wrap: wrap;
+            width: 100%;
+            margin-left: 0;
+        }
+	}
+	.colTwo {
+		position: relative;
+		width: calc(50% - 20px);
+		margin: 0 10px;
+        @include tablet-down{
+            width: 100%;
+            margin: 0 0 40px;
+            &:last-child{
+                margin-bottom: 0;
+            }
+        }
+	}
+    .content{
+        position: relative;
+        width: 100%;
+        padding-right: 50px;
+        @include tablet-down{
+            padding-right: 0;
+        }
+    }
+    .imageWrap{
+        position: relative;
+        width: 100%;
+        font-size: 0;
+        img{
+            width: 100%;
+            height: auto;
+            object-fit: cover;
+        }
+    }
+    h2{
+        color: $atlantisGreen;
+        margin-bottom: 15px;
+    }
+    h4{
+        color: $atlantisGreen;
+        margin-bottom: 15px;
+    }
+    p{
+        color: $grey;
+        margin-bottom: 20px;
+    }
+}

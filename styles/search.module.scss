@@ -1,0 +1,74 @@
+@import './variables';
+
+.search_filter {
+	background-color: $white;
+
+	.search {
+		width: 300px;
+		height: 50px;
+		padding: 10px;
+		font-size: 20px;
+	}
+
+	.row {
+		position: relative;
+		width: calc(100% + 40px);
+		margin-left: -20px;
+		display: flex;
+		flex-wrap: wrap;
+	}
+
+	.card {
+		padding-top: 20px;
+		position: relative;
+		width: calc(33.33% - 40px);
+		margin: 0 20px 30px;
+		box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+
+		.image_wrap {
+			width: 100%;
+			max-height: 140px;
+			height: 100%;
+			position: relative;
+			font-size: 0;
+
+			img {
+				height: 100%;
+				object-fit: contain;
+			}
+		}
+	}
+
+	.content {
+		position: relative;
+		padding: 30px;
+	}
+
+	.category {
+		color: $grey;
+		margin-bottom: 10px;
+	}
+
+	.price {
+		color: $bostonBlue;
+		margin-bottom: 10px;
+	}
+
+	.title {
+		color: $bostonBlue;
+		margin-bottom: 20px;
+		-webkit-line-clamp: 2;
+		overflow: hidden;
+		display: -webkit-box;
+		text-overflow: ellipsis;
+		-webkit-box-orient: vertical;
+	}
+
+	.description {
+		-webkit-line-clamp: 3;
+		overflow: hidden;
+		display: -webkit-box;
+		text-overflow: ellipsis;
+		-webkit-box-orient: vertical;
+	}
+}

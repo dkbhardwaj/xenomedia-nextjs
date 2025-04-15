@@ -1,0 +1,184 @@
+@import './_variables';
+
+.intro {
+	width: 100%;
+	&.service {
+		.col_two_wrapper {
+			width: 100%;
+			padding-right: 60px;
+			overflow-x: clip;
+		}
+
+		.col_left {
+			width: 100%;
+			margin: 0 0 30px;
+			padding: 0;
+		}
+
+		.col_right {
+			width: 100%;
+			padding: 0;
+			margin-bottom: 40px;
+			@include desktop-down {
+				margin-bottom: 0;
+			}
+
+			.caption {
+				height: auto;
+			}
+			p {
+				-webkit-line-clamp: unset;
+				overflow: visible;
+				margin-bottom: 10px;
+			}
+		}
+		img {
+			margin-bottom: 20px;
+		}
+	}
+
+	.col_two_wrapper {
+		position: relative;
+		width: 100%;
+		position: relative;
+		display: flex;
+		flex-wrap: wrap;
+		&.hidePattern {
+			padding-right: 0;
+		}
+	}
+
+	.col_left {
+		position: relative;
+		width: calc(25% - 20px);
+		margin-right: 20px;
+		padding: 0 80px 0 0;
+
+		@include tablet-down {
+			width: 100%;
+			margin: 0 0 15px 0;
+			padding: 0;
+		}
+
+		h2 {
+			color: $grey;
+		}
+	}
+
+	.col_right {
+		position: relative;
+		width: 75%;
+		padding: 0 50px 0 200px;
+		margin-bottom: 60px;
+
+		@include desktop-down {
+			margin-bottom: 30px;
+		}
+
+		@include tablet {
+			margin-bottom: 30px;
+		}
+
+		@include tablet-down {
+			margin-bottom: 20px;
+		}
+
+		.pattern {
+			position: absolute;
+			width: 900px;
+			height: 400px;
+			top: -50px;
+			z-index: -1;
+			left: -160px;
+			font-size: 0;
+
+			@include desktop-down {
+				display: none;
+			}
+
+			.getanim {
+				display: inline-block;
+			}
+
+			svg {
+				width: 100%;
+				height: 100%;
+				display: block;
+				opacity: 0;
+				transition: opacity 0.2s ease;
+
+				&.anim {
+					opacity: 1;
+
+					.fadein {
+						opacity: 0;
+						animation-delay: 0.7s;
+					}
+
+					.go_anim {
+						stroke-width: 5;
+						stroke-dasharray: 110%;
+						stroke-dashoffset: 110%;
+						animation-duration: 0.9s;
+						animation-delay: 0.9s;
+
+						&.line_2 {
+							animation-delay: 1.3s;
+						}
+
+						&.line_3 {
+							animation-delay: 1.65s;
+						}
+					}
+				}
+			}
+		}
+
+		@include desktop-down {
+			padding: 0;
+		}
+
+		@include tablet-down {
+			width: 100%;
+			padding: 0;
+		}
+
+		.caption {
+			color: $grey;
+			-webkit-box-orient: vertical;
+			display: -webkit-box;
+			-webkit-line-clamp: 7;
+			text-overflow: ellipsis;
+			overflow: hidden;
+			height: 220px;
+			@include desktop-down {
+				height: auto;
+			}
+
+			p {
+				margin-bottom: 10px;
+				&:last-child {
+					margin-bottom: 0;
+				}
+			}
+		}
+	}
+
+	.no_margin_bottom {
+		p {
+			margin-bottom: 0;
+		}
+	}
+
+	.btn_wrap {
+		position: relative;
+		text-align: right;
+
+		@include desktop-down {
+			text-align: left;
+		}
+	}
+	.hide{
+		display: none;
+	}
+}

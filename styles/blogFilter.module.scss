@@ -1,0 +1,558 @@
+@import './variables';
+
+.blog_filter,
+.project_filter {
+	.card_wrap {
+		position: relative;
+		width: calc(33.33% - 20px);
+		margin: 0 10px 25px;
+		box-shadow: rgba(0, 0, 0, 0.3) -4px 6px 19px 1px,
+			rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+
+		@include tablet {
+			width: calc(50% - 20px);
+		}
+
+		@include phablet {
+			width: calc(50% - 20px);
+		}
+
+		@include phablet-down {
+			width: calc(100% - 20px);
+		}
+
+		&:hover {
+			.card {
+				.text_wrap {
+					top: 0;
+					height: 100%;
+					clip-path: polygon(0 0, 100% 0%, 100% 100%, 0% 100%);
+					padding: 20px;
+				}
+
+				.heading {
+					opacity: 0;
+					height: 0;
+					min-height: 0;
+					margin: 0;
+					padding: 0;
+				}
+
+				.short_detail_wrap {
+					opacity: 1;
+					z-index: 3;
+				}
+			}
+		}
+	}
+
+	.no_img {
+		width: 100%;
+		height: 100%;
+		text-align: center;
+		vertical-align: middle;
+		padding-top: 100px;
+		background-color: rgba($color: $black, $alpha: 0.2);
+
+		h4 {
+			color: $lightGrey;
+		}
+	}
+
+	.card {
+		position: relative;
+		width: 100%;
+		height: 400px;
+		overflow: hidden;
+
+		@include phablet {
+			height: 350px;
+		}
+
+		@include phablet-down {
+			height: 350px;
+		}
+	}
+
+	.text_wrap {
+		position: absolute;
+		width: calc(100% + 10px);
+		height: 241px;
+		top: 40%;
+		left: -5px;
+		padding: 40px 20px 20px;
+		background-color: $bostonBlue;
+		clip-path: polygon(0 12%, 100% 0%, 100% 100%, 0% 100%);
+		transition: all 0.3s ease-in-out;
+
+		@include tablet {
+			clip-path: polygon(0 15%, 100% 0%, 100% 100%, 0% 100%);
+		}
+
+		@include phablet {
+			height: 200px;
+			top: 44%;
+			clip-path: polygon(0 18%, 100% 0%, 100% 100%, 0% 100%);
+		}
+
+		@include phablet-down {
+			height: 200px;
+			top: 44%;
+			clip-path: polygon(0 21%, 100% 0%, 100% 100%, 0% 100%);
+		}
+
+		.type {
+			color: $atlantisGreen;
+			margin-bottom: 10px;
+			font-weight: 400;
+			font-size: 18px;
+		}
+
+		span {
+			display: inline-block;
+			position: relative;
+			margin: 0 0 10px;
+			color: $white;
+			font-size: 14px;
+		}
+
+		.heading {
+			color: $white;
+			min-height: 110px;
+			font-size: 20px;
+			font-weight: normal;
+			line-height: 1.4;
+			display: -webkit-box;
+			-webkit-line-clamp: 5;
+			-webkit-box-orient: vertical;
+			overflow: hidden;
+			text-overflow: ellipsis;
+			transition: all 0.3s ease-in-out;
+
+			@include phablet {
+				font-size: 18px;
+				max-height: 76px;
+				min-height: 76px;
+				-webkit-line-clamp: 4;
+			}
+
+			@include phablet-down {
+				font-size: 16px;
+				max-height: 70px;
+				min-height: 70px;
+				-webkit-line-clamp: 4;
+			}
+		}
+	}
+
+	.short_detail_wrap {
+		opacity: 0;
+		height: 0;
+		transition: all 0.3s ease-in-out;
+
+		p {
+			color: $white;
+			display: -webkit-box;
+			font-size: 18px;
+			line-height: 1.5;
+			-webkit-line-clamp: 11;
+			-webkit-box-orient: vertical;
+			overflow: hidden;
+			text-overflow: ellipsis;
+
+			@include phablet {
+				-webkit-line-clamp: 9;
+			}
+
+			@include phablet-down {
+				font-size: 16px;
+				-webkit-line-clamp: 10;
+			}
+		}
+	}
+
+	.img_wrap {
+		position: relative;
+		width: 100%;
+		height: 213px;
+		overflow: scroll;
+
+		@include phablet {
+			height: 200px;
+		}
+
+		@include phablet-down {
+			height: 200px;
+		}
+
+		&::after {
+			content: '';
+			position: relative;
+			width: 100%;
+			height: 100%;
+			top: 0;
+			left: 0;
+			transition: all 0.3s ease-in-out;
+		}
+
+		img {
+			width: 100%;
+			height: 100%;
+			object-fit: cover;
+		}
+	}
+
+	.filter_block {
+		width: 100%;
+		position: relative;
+		display: flex;
+		flex-wrap: wrap;
+		align-items: center;
+		justify-content: space-between;
+		margin-bottom: 50px;
+
+		@include phablet {
+			width: calc(100% + 20px);
+			margin-left: -10px;
+		}
+	}
+
+	.category_wrap {
+		width: 100%;
+		position: relative;
+		max-width: 300px;
+
+		@include phablet {
+			width: calc(50% - 20px);
+			max-width: initial;
+			margin: 0 10px;
+		}
+
+		@include phablet-down {
+			width: 100%;
+			max-width: initial;
+			margin-bottom: 30px;
+		}
+
+		&.active {
+			ul {
+				height: 100px;
+				opacity: 1;
+				visibility: visible;
+			}
+
+			.selected_val {
+				border-color: $atlantisGreen;
+			}
+
+			&::after {
+				border-color: $atlantisGreen;
+				transform: rotate(45deg);
+				top: 15px;
+			}
+		}
+
+		&:hover {
+			&::after {
+				border-color: $atlantisGreen;
+			}
+
+			.selected_val {
+				border-color: $atlantisGreen;
+			}
+		}
+
+		&::after {
+			content: '';
+			position: absolute;
+			width: 10px;
+			height: 10px;
+			top: 10px;
+			right: 10px;
+			transform: rotate(225deg);
+			border-top: 2px solid #252b25;
+			border-left: 2px solid #252b25;
+			transition: all 0.3s ease-in-out;
+		}
+
+		ul {
+			opacity: 0;
+			visibility: hidden;
+			position: absolute;
+			width: 100%;
+			height: 0;
+			top: 100%;
+			padding: 8px 0 0;
+			left: 0;
+			z-index: 5;
+			transition: all 0.3s ease-in-out;
+			list-style: none;
+			background-color: $white;
+			box-shadow: rgba(0, 0, 0, 0.3) -4px 6px 19px 1px,
+				rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+
+			li {
+				padding: 10px;
+
+				label {
+					cursor: pointer;
+					color: $grey;
+					transition: color 0.3s ease-in-out;
+
+					&:hover {
+						color: $atlantisGreen;
+					}
+
+					input[type='checkbox'] {
+						margin: 0 10px 0 0;
+						accent-color: $atlantisGreen;
+
+						&::before {
+							color: aqua;
+						}
+					}
+				}
+			}
+		}
+	}
+
+	.selected_val {
+		position: relative;
+		width: 100%;
+		display: block;
+		height: 40px;
+		border: 1px solid $grey;
+		outline: none;
+		padding: 10px;
+		font-size: 16px;
+		color: $grey;
+		transition: color 0.3s ease-in-out;
+		cursor: pointer;
+	}
+
+	.search_wrap {
+		width: 100%;
+		position: relative;
+		max-width: 300px;
+
+		@include phablet {
+			width: calc(50% - 20px);
+			max-width: initial;
+			margin: 0 10px;
+		}
+
+		@include phablet-down {
+			width: 100%;
+			max-width: initial;
+		}
+
+		&:hover {
+			&::after {
+				background: url('../public/search_green.svg') no-repeat center;
+				background-size: 100%;
+			}
+
+			.search {
+				border-color: $atlantisGreen;
+			}
+		}
+
+		&::after {
+			content: '';
+			position: absolute;
+			width: 20px;
+			height: 20px;
+			right: 10px;
+			top: 50%;
+			transform: translateY(-50%);
+			background: url('../public/search.svg') no-repeat center;
+			background-size: 100%;
+			transition: all 0.3s ease-in-out;
+		}
+	}
+
+	.search {
+		width: 100%;
+		display: block;
+		height: 40px;
+		border: none;
+		outline: none;
+		padding: 5px 15px;
+		font-size: 16px;
+		color: $grey;
+		border-bottom: 2px solid $grey;
+		transition: border-color 0.3s ease-in-out;
+
+		&::placeholder {
+			color: $grey;
+			font-size: 16px;
+		}
+
+		&:focus {
+			border-color: $atlantisGreen;
+			color: $grey;
+		}
+	}
+}
+.blog_filter .title{
+	margin-bottom: 30px;
+}
+
+.filters {
+	position: relative;
+	margin-bottom: 30px;
+
+	p {
+		position: relative;
+		padding: 10px 15px;
+		display: inline-block;
+		margin-right: 20px;
+		box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+		cursor: pointer;
+
+		&:hover {
+			span {
+				color: $atlantisGreen;
+			}
+		}
+	}
+
+	span {
+		display: inline-block;
+		margin-left: 10px;
+		font-weight: 400;
+		font-size: 22px;
+	}
+}
+
+.project_filter {
+	.filter_wrapper {
+		width: 100%;
+		display: flex;
+		flex-wrap: wrap;
+		align-items: center;
+		margin: 0 0 40px;
+
+		@include phablet-down {
+			margin: 0 0 50px;
+		}
+
+		.title {
+			width: 17%;
+
+			@include desktop-down {
+				width: 100%;
+			}
+
+			@include phablet-down {
+				margin-bottom: 20px;
+			}
+
+			h6 {
+				margin: 0 20px 0 0;
+				width: 100%;
+			}
+		}
+
+		.filter_wrap {
+			width: 83%;
+			display: flex;
+			flex-wrap: wrap;
+
+			@include tablet {
+				width: 100%;
+				margin-top: 30px;
+			}
+
+			@include phablet {
+				width: calc(100% + 20px);
+				margin-left: -10px;
+				margin-top: 30px;
+			}
+
+			@include phablet-down {
+				width: 100%;
+			}
+		}
+	}
+
+	.category_wrap {
+		width: calc(50% - 20px);
+		margin-right: 20px;
+
+		@include phablet-down {
+			width: 100%;
+			margin-right: 0;
+		}
+
+		&:last-child {
+			margin-right: 0;
+
+			@include phablet-down {
+				margin-bottom: 0;
+			}
+		}
+
+		&.active {
+			ul {
+				height: auto;
+			}
+		}
+	}
+
+	.pltform {
+		position: relative;
+	}
+
+	.card_wrap:hover {
+		.card {
+			.text_wrap {
+				top: 0;
+				height: 100%;
+				clip-path: polygon(0 0, 100% 0%, 100% 100%, 0% 100%);
+				padding: 20px;
+			}
+
+			h6 {
+				display: none;
+			}
+
+			.heading {
+				opacity: 1;
+				height: auto;
+				min-height: auto;
+				margin: 0 0 10px;
+				padding: 0;
+			}
+
+			span {
+				display: none;
+			}
+
+			.short_detail_wrap {
+				opacity: 1;
+			}
+		}
+	}
+
+	.short_detail_wrap {
+		ul {
+			list-style: none;
+			position: relative;
+
+			li {
+				margin: 10px 0 5px;
+			}
+
+			a {
+				position: relative;
+				z-index: 5;
+				color: $atlantisGreen;
+
+				&:hover {
+					text-decoration: underline;
+				}
+			}
+		}
+	}
+}

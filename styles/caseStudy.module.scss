@@ -1,0 +1,414 @@
+@import './variables';
+
+.case_study {
+	&.hidePattern {
+		.row {
+			margin-bottom: 0;
+		}
+		.pattern {
+			display: none;
+		}
+	}
+	.row {
+		position: relative;
+		width: 100%;
+		min-height: 390px;
+		display: flex;
+		flex-wrap: wrap;
+		z-index: 1;
+		margin-bottom: 100px;
+
+		@include tablet-down {
+			margin-bottom: 60px;
+		}
+
+		&.last {
+			@include large_container-down {
+				margin-bottom: 0;
+			}
+		}
+
+		&:nth-child(2n) {
+			flex-direction: row-reverse;
+
+			&::after {
+				top: 20px;
+				left: auto;
+				right: 20px;
+
+				@include phablet-down {
+					left: 0;
+					right: 0;
+				}
+			}
+
+			.bg_grey {
+				&::before {
+					top: 0;
+					right: 0;
+					left: -152px;
+
+					@include tablet-down {
+						left: 0;
+					}
+				}
+			}
+
+			.content {
+				padding: 35px 50px 35px 110px;
+				text-align: right;
+
+				@include tablet {
+					padding: 35px;
+				}
+
+				@include tablet-down {
+					text-align: center;
+					padding: 40px 20px;
+				}
+			}
+
+			.video_wrap {
+				left: -40px;
+
+				@include tablet {
+					left: -30px;
+				}
+
+				@include tablet-down {
+					left: auto;
+				}
+			}
+		}
+
+		&::after {
+			content: '';
+			position: absolute;
+			width: 94%;
+			height: 100%;
+			top: 20px;
+			left: 20px;
+			background-color: $bostonBlue;
+			z-index: -1;
+
+			@include phablet-down {
+				width: 100%;
+				left: 0;
+			}
+		}
+	}
+
+	.col_two {
+		position: relative;
+		width: 50%;
+
+		@include tablet-down {
+			width: 100%;
+		}
+	}
+
+	.bg_grey {
+		position: relative;
+
+		&::before {
+			content: '';
+			position: absolute;
+			width: calc(100% + 152px);
+			height: 100%;
+			top: 0;
+			left: 0;
+			background-color: $lightGrey;
+			z-index: 0;
+
+			@include tablet-down {
+				width: 100%;
+			}
+		}
+	}
+
+	.content {
+		padding: 30px 110px 30px 50px;
+		position: relative;
+		width: 100%;
+		top: 50%;
+		transform: translateY(-50%);
+
+		@include tablet {
+			padding: 30px;
+		}
+
+		@include tablet-down {
+			text-align: center;
+			padding: 30px 20px;
+		}
+
+		h3 {
+			color: $atlantisGreen;
+			margin-bottom: 30px;
+			position: inherit;
+
+			@include tablet {
+				margin-bottom: 20px;
+			}
+
+			@include tablet-down {
+				margin-bottom: 15px;
+			}
+		}
+
+		h5 {
+			color: $grey;
+			margin-bottom: 40px;
+			position: relative;
+			font-weight: 400;
+
+			@include tablet {
+				margin-bottom: 20px;
+			}
+
+			@include tablet-down {
+				margin-bottom: 15px;
+				text-align: center;
+			}
+		}
+	}
+
+	.btn_wrap {
+		margin: 20px 0 0;
+
+		@include tablet-down {
+			text-align: center;
+		}
+	}
+
+	.logo_wrap {
+		max-width: 172px;
+		height: 114px;
+		width: 100%;
+		position: relative;
+		object-fit: contain;
+		margin: 0 auto 20px;
+
+		@include tablet {
+			height: 75px;
+		}
+
+		@include tablet-down {
+			height: 55px;
+		}
+
+		img {
+			object-fit: contain;
+			height: 100%;
+		}
+	}
+
+	.video_wrap {
+		position: relative;
+		width: 100%;
+		height: 525px;
+		top: 50%;
+		left: 0;
+		transform: translateY(-50%);
+		-webkit-clip-path: url(#text-overlay);
+		clip-path: url(#text-overlay);
+
+		@include desktop {
+			height: 432px;
+		}
+
+		@include tablet {
+			height: 325px;
+		}
+
+		@include tablet-down {
+			margin: 15px auto 0;
+		}
+
+		@include phablet {
+			max-width: 400px;
+			height: 340px;
+		}
+
+		@include phone {
+			max-width: 380px;
+			height: 315px;
+		}
+
+		@include phone-down {
+			max-width: 250px;
+			height: 220px;
+		}
+	}
+
+	video {
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+	}
+
+	svg {
+		display: block;
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+
+		clipPath {
+			width: 100%;
+			height: 100%;
+
+			path {
+				width: 100%;
+				height: 100%;
+			}
+		}
+
+		text {
+			font-family: Arial, Helvetica, sans-serif;
+			font-weight: 800;
+			font-size: 1090px;
+
+			@include desktop {
+				font-size: 900px;
+			}
+
+			@include tablet {
+				font-size: 680px;
+			}
+
+			@include phablet {
+				font-size: 700px;
+			}
+
+			@include phone {
+				font-size: 650px;
+			}
+
+			@include phone-down {
+				font-size: 456px;
+			}
+		}
+	}
+
+	.x_overlay {
+		position: absolute;
+		width: 100%;
+		height: 100%;
+		top: 0;
+		left: 0;
+	}
+
+	.btn_with_pattern {
+		position: relative;
+		width: 100%;
+
+		.patterm {
+			position: relative;
+			width: 90%;
+		}
+	}
+
+	.text_atlantisGreen {
+		color: $atlantisGreen;
+	}
+
+	.img_wrapper {
+		position: relative;
+		width: 100%;
+		display: flex;
+
+		@include tablet-down {
+			display: block;
+			padding: 20px;
+		}
+
+		.img_wrap {
+			position: relative;
+			width: calc(50% - 20px);
+			margin: 0 10px;
+			height: 225px;
+			text-align: center;
+			@include tablet {
+				height: 180px;
+			}
+			@include phablet {
+				top: 0 !important;
+				height: 160px;
+			}
+			@include phablet-down {
+				top: 0 !important;
+				height: 140px;
+			}
+
+			img {
+				width: 100%;
+				height: 100%;
+				object-fit: contain;
+				position: relative;
+			}
+
+			@include tablet-down {
+				margin: 0 auto;
+
+				&:nth-child(2) {
+					margin-top: 30px;
+				}
+			}
+
+			&.full_width {
+				width: calc(100% - 20px);
+
+				@include tablet-down {
+					width: calc(50% - 20px);
+				}
+			}
+		}
+	}
+
+	.pattern {
+		position: absolute;
+		width: 1930px;
+		height: 472px;
+		bottom: -350px;
+		z-index: -1;
+		right: -765px;
+		font-size: 0;
+
+		@include large_container-down {
+			display: none;
+		}
+
+		svg {
+			width: 100%;
+			height: 100%;
+			display: block;
+			opacity: 0;
+			transition: opacity 0.2s ease;
+
+			&.anim {
+				opacity: 1;
+
+				.fadein {
+					opacity: 0;
+					animation-delay: 0.7s;
+				}
+
+				.go_anim {
+					stroke-width: 5;
+					stroke-dasharray: 1000;
+					stroke-dashoffset: 1000;
+					animation-duration: 0.9s;
+					animation-delay: 0.9s;
+
+					&.line_2 {
+						stroke-dasharray: 185%;
+						stroke-dashoffset: 185%;
+						animation-delay: 1.3s;
+					}
+				}
+			}
+		}
+	}
+}

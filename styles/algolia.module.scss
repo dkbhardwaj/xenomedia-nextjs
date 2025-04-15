@@ -1,0 +1,46 @@
+.searchBox{
+    margin: 20px 0;
+    input{
+        padding: 10px;
+        width: 300px;
+
+    }
+    button{
+        padding: 10px;
+        cursor: pointer;
+    }
+}
+.wrapper ul{
+    width: 100%;
+    position: relative;
+    display: flex;
+    
+    flex-wrap: wrap;
+    li{
+        width: calc(33.33% - 20px);
+        margin: 0 10px 30px;
+        list-style: none;
+    }
+    .img_wrap{
+       width: auto;
+       height: 165px;
+       img{
+        width: auto;
+        object-fit: contain;
+       }
+    }
+}
+
+.pagination{
+    margin: 50px 0 0;
+  ul{
+    display: flex;
+    list-style: none;
+  }
+  li{
+    padding: 5px 10px;
+    margin: 0 10px;
+    background-color: rgb(26, 239, 168);
+  }
+  
+}

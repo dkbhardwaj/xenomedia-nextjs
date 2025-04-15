@@ -1,0 +1,539 @@
+@import './variables';
+
+.content_with_list {
+	width: 100%;
+	max-width: 1400px;
+	margin: 0 auto;
+    &.content_with_list_new{
+		.col_right {
+			padding: 20px 0 0 50px;
+		}
+		.col_left_wrap{
+			position: relative;
+			width: calc(75% - 20px);
+			margin-right: 20px;
+			padding: 20px;
+			z-index: 2;
+			@include tablet-down {
+				width: 100%;
+				margin: 0;
+			}
+			&::after {
+				content: '';
+				position: absolute;
+				width: calc(100% + 20px);
+				height: calc(100% - 5px);
+				left: 0;
+				top: 0;
+				z-index: -2;
+				background-color: $bostonBlue;
+			}
+			.btn_wrap{
+				text-align: right;
+				margin-top: 20px;
+			}
+			h3{
+				color: $white;
+			}
+			.pattern{
+				bottom: -38px;
+				right: auto;
+				left: -566px;
+			}
+			svg{
+				opacity: 1;
+				&.anim {
+					opacity: 1;
+		
+					.fadein {
+						opacity: 0;
+						animation-delay: 0.7s;
+					}
+		
+					.go_anim {
+						stroke-width: 5;
+						stroke-dasharray: 1300;
+						stroke-dashoffset: 1300;
+						animation-duration: 0.9s;
+						animation-delay: 0.9s;
+		
+						&.line_3 {
+							stroke-dasharray: 185%;
+							stroke-dashoffset: 185%;
+							animation-delay: 1.3s;
+						}
+					}
+				}
+			}
+			.btn_wrap {
+
+				@include desktop-down{
+					margin-top: 20px;
+					text-align: left;
+				}
+			}
+		}
+		.col_two_wrapper .col_left {
+			width: 100%;
+			margin-top: 30px;
+			padding-left: 50px ;
+			&::before {
+				width: calc(100% + 160px);
+				left: -140px;
+			}
+			&::after {
+				width: 0;
+				height: 0;
+				left: -110px;
+			}
+		}
+		h4{
+			color: $white;
+		}
+		h2{
+			font-size: 68px;
+			font-weight: 900;
+			@include desktop-down {
+				font-size: 42px;
+			}
+	
+			@include tablet-down {
+				font-size: 38px;
+			}
+	
+			@include phablet-down {
+				font-size: 30px;
+			}
+		}
+	}
+	&.homepage {
+		.col_left {
+			&::before {
+				width: calc(100% + 120px);
+				left: -120px;
+			}
+
+			&::after {
+				width: calc(100% + 120px);
+				left: -110px;
+			}
+		}
+
+		.btn_wrap {
+			@include desktop-down{
+				margin-top: 50px;
+				text-align: right;
+			}
+		}
+	}
+	
+
+	.col_two_wrapper {
+		width: 100%;
+		position: relative;
+		display: flex;
+		flex-wrap: wrap;
+
+		@include tablet-down {
+			flex-direction: column-reverse;
+		}
+	}
+
+	.col_left {
+		position: relative;
+		width: calc(75% - 20px);
+		margin-right: 20px;
+		padding: 20px;
+		z-index: 2;
+
+		@include tablet-down {
+			width: 100%;
+			margin: 0;
+		}
+
+		&.specs {
+			position: relative;
+			width: calc(100% - 200px);
+			display: flex;
+			flex-wrap: wrap;
+			margin-right: 200px;
+			padding: 30px 20px 20px 10px;
+			margin-bottom: 72px;
+
+			@include desktop-down {
+				width: 100%;
+				margin-bottom: 0;
+			}
+
+
+			.bg_white_arrow {
+				margin: 0;
+
+				@include desktop-up {
+					font-size: 39px;
+				}
+
+				@include tablet {
+					font-size: 30px;
+				}
+
+				&::before {
+					right: 10%;
+
+					@include desktop-down {
+						right: 20%;
+					}
+
+					@include phablet-down {
+						right: 0;
+					}
+				}
+
+				&::after {
+					top: 23%;
+					right: 8%;
+					transform: rotate(45deg) translateY(-60%);
+
+					@include tablet {
+						top: 11%;
+						right: 15%;
+					}
+
+					@include tablet-down {
+						top: 10%;
+						right: 17%;
+						transform: rotate(45deg) translateY(-90%);
+					}
+
+					@include phablet-down {
+						right: -6%;
+					}
+				}
+			}
+		}
+
+		&::before {
+			content: '';
+			position: absolute;
+			width: 100%;
+			height: 100%;
+			left: 0;
+			top: 0;
+			background-color: $atlantisGreen;
+			z-index: -1;
+		}
+
+		&::after {
+			content: '';
+			position: absolute;
+			width: 100%;
+			height: 100%;
+			left: 10px;
+			top: 10px;
+			z-index: -2;
+			background-color: $bostonBlue;
+		}
+
+		.content {
+			position: relative;
+			width: 100%;
+			z-index: 3;
+		}
+
+		.heading_wrap {
+			width: 100%;
+			display: flex;
+			flex-wrap: wrap;
+			margin-bottom: 30px;
+		}
+
+		.heading {
+			position: relative;
+			width: 30%;
+
+			@include phablet-down {
+				width: auto;
+			}
+
+			h3 {
+				font-weight: 600;
+			}
+		}
+
+		.bg_white_arrow {
+			position: relative;
+			overflow-y: clip;
+
+			&::before {
+				content: '';
+				position: absolute;
+				width: calc(100% + 120px);
+				height: 100%;
+				right: 55%;
+				background: $white;
+				z-index: -1;
+
+				@include phablet-down {
+					right: -10px;
+					top: 0;
+				}
+			}
+
+			&::after {
+				content: '';
+				position: absolute;
+				width: 74px;
+				height: 100%;
+				top: 16%;
+				right: 47%;
+				background: $white;
+				transform: rotate(45deg) translateY(-48%);
+				z-index: -1;
+
+				@include tablet {
+					top: -16%;
+				}
+
+				@include phablet {
+					top: -23%;
+				}
+
+				@include phablet-down {
+					top: -30%;
+					right: -25px;
+				}
+			}
+		}
+
+		.sub_heading {
+			width: calc(70% - 10px);
+			margin-left: 10px;
+
+			@include phablet-down {
+				width: 100%;
+				margin: 20px 0 0 0;
+			}
+
+			h5 {
+				color: $white;
+				font-weight: 600;
+			}
+		}
+
+		.list_wrap {
+			width: 100%;
+			p a{
+				color: $bostonBlue;
+				&:hover{
+					text-decoration: underline;
+				}
+			}
+
+			@include phablet-down {
+				margin-top: 10px;
+			}
+
+			h4 {
+				color: $white;
+			}
+
+			ul {
+				width: 100%;
+				position: relative;
+				display: flex;
+				flex-wrap: wrap;
+				margin: 20px 0 0;
+			}
+
+			li {
+				display: inline-block;
+				width: 50%;
+				margin: 0 0 20px;
+				padding-right: 10px;
+
+				@include phone-down {
+					width: 100%;
+				}
+				>a{
+					transition: color 0.3s ease-in-out;
+					font-size: 20px;
+					color: $black;
+				 &:hover{
+					color: $bostonBlue;
+				 }
+				 @include desktop-down {
+		 			font-size: 18px;
+		 		}
+				@include desktop {
+					font-size: 16px;
+				}
+
+				}
+			}
+		}
+	}
+
+	.cross_wrap {
+		position: absolute;
+		bottom: -23px;
+		right: 0;
+		display: flex;
+		flex-wrap: wrap;
+
+		@include phablet-down {
+			bottom: -15px;
+		}
+
+		.img_wrap {
+			width: 30px;
+			height: 30px;
+			margin-right: 10px;
+
+			@include phablet-down {
+				width: 20px;
+				height: 20px;
+			}
+
+			img {
+				object-fit: contain;
+			}
+		}
+	}
+
+	.col_right {
+		width: 25%;
+		padding: 0 0 0 50px;
+		text-align: right;
+
+		@include tablet-down {
+			width: 100%;
+			padding: 0;
+			text-align: left;
+			margin-bottom: 30px;
+		}
+
+		h2 {
+			color: $grey;
+
+		}
+	}
+
+	.btn_wrap {
+		position: relative;
+		margin-top: 80px;
+		@include desktop-down {
+			margin-top: 40px;
+		}
+	}
+
+	.pattern {
+		position: absolute;
+	    width: 1445px;
+		height: 466px;
+		bottom: -222px;
+		z-index: -1;
+		right: -500px;
+		font-size: 0;
+
+		@include desktop-down {
+			display: none;
+		}
+
+		svg {
+			width: 100%;
+			height: 100%;
+			display: block;
+			opacity: 0;
+			transition: opacity 0.2s ease;
+
+			&.anim {
+				opacity: 1;
+
+				.fadein {
+					opacity: 0;
+					animation-delay: 0.7s;
+				}
+
+				.go_anim {
+					stroke-width: 5;
+					stroke-dasharray: 1000;
+					stroke-dashoffset: 1000;
+					animation-duration: 0.9s;
+					animation-delay: 0.9s;
+
+					&.line_2 {
+						stroke-dasharray: 185%;
+						stroke-dashoffset: 185%;
+						animation-delay: 1.3s;
+					}
+				}
+			}
+		}
+	}
+
+	&.service_three_cards {
+		.col_left {
+			position: relative;
+			width: calc(75% - 20px);
+			margin-right: 20px;
+			margin-left: 0;
+			padding: 20px;
+			z-index: 2;
+
+			&.specs {
+				width: 100%;
+				padding: 60px 20px 40px;
+				justify-content: center;
+				margin-bottom: 0;
+
+				&::before {
+					width: 100%;
+				}
+
+				@include tablet {
+					padding: 40px 20px 20px;
+				}
+
+				@include tablet-down {
+					padding: 40px 20px 20px;
+				}
+			}
+		}
+
+		.col_two {
+			position: relative;
+			width: calc(50% - 20px);
+			margin: 0 10px 20px;
+			background-color: $white;
+
+			@include tablet-down {
+				width: calc(100% - 20px);
+			}
+		}
+
+		.card {
+			position: relative;
+			width: 100%;
+			padding: 30px;
+
+			@include tablet {
+				padding: 20px;
+			}
+		}
+
+		.title {
+			position: relative;
+			text-align: center;
+
+			h3 {
+				color: $atlantisGreen;
+			}
+		}
+
+		.text {
+			position: relative;
+			margin-top: 20px;
+		}
+
+	}
+}
