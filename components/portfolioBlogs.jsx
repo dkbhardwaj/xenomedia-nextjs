@@ -8,14 +8,11 @@ import { IMAGES_MANIFEST } from 'next/dist/shared/lib/constants';
 export default function PortfolioBlogs(props) {
     const { locale } = useRouter();
     const projects = props.projects
+   
    projects.sort(function (a, b) {
-        if (a.title < b.title) {
-          return -1;
-        }
-        if (a.title > b.title) {
-          return 1;
-        }
-        return 0;
+        const aOrder = a.field_order ?? Infinity;
+        const bOrder = b.field_order ?? Infinity;
+        return aOrder - bOrder;
    });
     const multiLanguage = props.lang;
     const hrefLang = props.hrefLang;
