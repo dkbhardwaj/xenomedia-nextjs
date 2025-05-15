@@ -25,7 +25,6 @@ import ContentWithImage from '../../components/sections/colTwoImage';
 import Body from '../../components/sections/Body';
 import ColFourCards from '../../components/sections/colFourCards';
 
-
 export default function PageTemplate({
 	bladeUrl,
 	blades,
@@ -52,7 +51,7 @@ export default function PageTemplate({
 		services,
 		allResources,
 	);
-	
+	// console.log(sortedProjects)
 	useEffect(() => {
 		document.body.classList.add(page.title.split(' ').join('-'));
 		return () => {
@@ -74,9 +73,19 @@ export default function PageTemplate({
 	);
 }
 //section builder
-function pageBuilder(id, data, vid, multiLang, hrefLang, blogs, projects, services,blogResources) {
+function pageBuilder(
+	id,
+	data,
+	vid,
+	multiLang,
+	hrefLang,
+	blogs,
+	projects,
+	services,
+	blogResources,
+) {
 	let blades = [];
-	
+
 	data.map((blade, index) => {
 		if (blade.type.replace('paragraph--', '') === 'hero_banner') {
 			blades.push(<HeroBanner data={blade} vidData={vid} />);
@@ -91,27 +100,39 @@ function pageBuilder(id, data, vid, multiLang, hrefLang, blogs, projects, servic
 		} else if (blade.type.replace('paragraph--', '') === 'banner_second') {
 			blades.push(<BannerSecond data={blade} />);
 		} else if (blade.type.replace('paragraph--', '') === 'view') {
-			blades.push(<View sectiondata={blade} data={blogResources} lang={multiLang} hrefLang={hrefLang} project={projects} serviceList={services} />);
-		} else if ((blade.type.replace('paragraph--', '')).replace("_new_section_","") === 'content_with_text') {
+			blades.push(
+				<View
+					sectiondata={blade}
+					data={blogResources}
+					lang={multiLang}
+					hrefLang={hrefLang}
+					project={projects}
+					serviceList={services}
+				/>,
+			);
+		} else if (
+			blade.type.replace('paragraph--', '').replace('_new_section_', '') ===
+			'content_with_text'
+		) {
 			blades.push(<ContentWithText data={blade} />);
-		} else if (blade.type.replace('paragraph--', '') === 'content_with_image_video') {
+		} else if (
+			blade.type.replace('paragraph--', '') === 'content_with_image_video'
+		) {
 			blades.push(<CaseStudy data={blade} />);
 		} else if (blade.type.replace('paragraph--', '') === 'html') {
-			blades.push(<HtmlIntro data={blade} />)
+			blades.push(<HtmlIntro data={blade} />);
 		} else if (blade.type.replace('paragraph--', '') === 'image_gallery') {
-			blades.push(<ImageGallery data={blade} />)
+			blades.push(<ImageGallery data={blade} />);
 		} else if (blade.type.replace('paragraph--', '') === 'content_with_image') {
-			blades.push(<ContentWithImage data={blade} />)
+			blades.push(<ContentWithImage data={blade} />);
 		} else if (blade.type.replace('paragraph--', '') === 'body') {
-			blades.push(<Body data={blade} />)
+			blades.push(<Body data={blade} />);
 		} else if (blade.type.replace('paragraph--', '') === 'team_grid') {
-			blades.push(<ColFourCards data={blade} />)
+			blades.push(<ColFourCards data={blade} />);
 		}
-
 	});
 	return blades;
 }
-
 
 //async function
 export async function getServerSideProps(context) {
@@ -139,7 +160,7 @@ export async function getServerSideProps(context) {
 			},
 		};
 	}
-	let page
+	let page;
 	try {
 		page = await store?.getObjectByPath({
 			objectName: 'node--page',
@@ -185,12 +206,11 @@ export async function getServerSideProps(context) {
 	});
 	//next page blogs
 
-	
-	var blogs
+	var blogs;
 	const pageSize = 50; // Set your desired page size
 	let allResources = [];
 	let currentPage = 0;
-	async function getBlogs(ps,cp) {
+	async function getBlogs(ps, cp) {
 		var temp = await store.getObject({
 			objectName: 'node--blog',
 			params: `include=field_featured_image.thumbnail,field_blog_type&page%5Boffset%5D=${cp}&page%5Blimit%5D=${ps}`,
@@ -198,32 +218,72 @@ export async function getServerSideProps(context) {
 			refresh: true,
 			anon: true,
 		});
-		return temp
+		return temp;
 	}
 	async function fetchAllResources() {
-		const data = await getBlogs(pageSize, currentPage)
-	
+		const data = await getBlogs(pageSize, currentPage);
+
 		if (data.length != 0) {
-			allResources = allResources.concat(data)
-			currentPage = currentPage + 50
-			fetchAllResources()
+			allResources = allResources.concat(data);
+			currentPage = currentPage + 50;
+			fetchAllResources();
 		} else {
-			return
+			return;
 		}
 	}
-	fetchAllResources()
-	
-    blogs = allResources
-	
-	
-	const projects = await store.getObject({
-		objectName: 'node--project',
-		params:
-			'include=field_featured_image.thumbnail , field_project_type , field_service , field_sector, field_project_type',
-		res: context.res,
-		refresh: true,
-		anon: true,
-	});
+	fetchAllResources();
+
+	blogs = allResources;
+
+	//-----projects
+
+	async function getAllProjects() {
+		let allProjects = [];
+		let page = 0;
+		const limit = 50;
+		let hasMore = true;
+
+		while (hasMore) {
+			try {
+				const params = new URLSearchParams({
+					'page[limit]': limit,
+					'page[offset]': page * limit,
+					include:
+						'field_featured_image.thumbnail,field_project_type,field_service,field_sector',
+				}).toString();
+
+				const projects = await store.getObject({
+					objectName: 'node--project',
+					params: params,
+					res: context.res,
+					refresh: true,
+					anon: true,
+				});
+
+				if (projects.length > 0) {
+					allProjects = [...allProjects, ...projects];
+					page++;
+				} else {
+					hasMore = false;
+				}
+			} catch (error) {
+				console.error('Error fetching projects:', error);
+				hasMore = false;
+				throw error;
+			}
+		}
+
+		return allProjects;
+	}
+
+	let projects;
+	try {
+		const allProjects = await getAllProjects();
+		projects = allProjects;
+	} catch (error) {
+		console.error('Failed to fetch projects:', error);
+	}
+
 	if (!blogs) {
 		throw new Error(
 			'No blogs returned. Make sure the objectName and params are valid!',
@@ -234,6 +294,12 @@ export async function getServerSideProps(context) {
 		key: 'created',
 		direction: 'desc',
 	});
+
+	if (!projects) {
+		throw new Error(
+			'No projects returned. Make sure the objectName and params are valid!',
+		);
+	}
 	const sortedProjects = sortDate({
 		data: projects,
 		key: 'created',
