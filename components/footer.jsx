@@ -21,12 +21,11 @@ export default function Footer() {
 					<div className={Styles.col_two}>
 						<div className={Styles.address_wrap}>
 							<h6>Contact Us</h6>
-							<span>
-								<pre>1870 W. Winchester Rd.
-                                Suite 148
-								Libertyville, IL 60048
-								</pre>
-							</span>
+							<div>
+								<span>1870 W. Winchester Rd.</span>
+                                <span>Suite 148</span>
+								<span>Libertyville, IL 60048</span>
+							</div>
 							<span>
 								<Link href="tel:630-599-1550">630.599.1550</Link>
 							</span>
