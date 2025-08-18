@@ -307,7 +307,7 @@ export async function getServerSideProps(context) {
 		.map((segment) => `/${segment}`)
 		.join('')}`;
 
-	const params = 'include=field_featured_image.thumbnail';
+	const params = 'include=field_featured_image.thumbnail&sort=-created&page[limit]=5`)';
 	// if preview, use preview endpoint and add to store.
 	const previewParams =
 		context.preview && (await getPreview(context, 'node--blog', params));
