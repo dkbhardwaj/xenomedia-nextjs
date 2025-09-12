@@ -24,19 +24,48 @@ export default function ContactForm(props) {
 	const [formVal, setFormVal] = useState("")
 
 	useEffect(() => {
-		var container = document.createElement("div")
-		setTimeout(() => {
-			var container2 = document.querySelector(".dynamicForm")
-			function decodeEntities(encodedString) {
-				var textArea = document.createElement('textarea');
-				textArea.innerHTML = encodedString;
-				return textArea.value;
-			}
-			container2.innerHTML = decodeEntities(formhtml)
-			var temp = decodeEntities(formhtml)
-			setFormVal(container2)
-		}, 300)
+	       var container = document.createElement("div");
+	       setTimeout(() => {
+		       var container2 = document.querySelector(".dynamicForm");
+		       function decodeEntities(encodedString) {
+			       var textArea = document.createElement('textarea');
+			       textArea.innerHTML = encodedString;
+			       return textArea.value;
+		       }
+		       container2.innerHTML = decodeEntities(formhtml);
+		       var temp = decodeEntities(formhtml);
+		       setFormVal(container2);
 
+		       // Add submission handler to the injected form
+		       const form = container2.querySelector('form');
+		       if (form) {
+			       form.addEventListener('submit', async (e) => {
+				       e.preventDefault();
+				       const formData = new FormData(form);
+				       const data = {};
+				       for (let [key, value] of formData.entries()) {
+					       data[key] = value;
+				       }
+				       try {
+					       // Replace with your actual endpoint
+					       const response = await fetch('https://dev-xenomedia-nextjs.pantheonsite.io/jsonapi/webform_rest/submit/contact_us', {
+						       method: 'POST',
+						       headers: {
+							       'Content-Type': 'application/json',
+						       },
+						       body: JSON.stringify(data),
+					       });
+					       if (response.ok) {
+						       window.location.href = '/thank-you';
+					       } else {
+						       alert('Submission failed. Please try again.');
+					       }
+				       } catch (error) {
+					       alert('An error occurred. Please try again.');
+				       }
+			       });
+		       }
+	       }, 300);
 	});
 
 
