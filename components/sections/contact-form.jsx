@@ -39,31 +39,33 @@ export default function ContactForm(props) {
 		       // Add submission handler to the injected form
 		       const form = container2.querySelector('form');
 		       if (form) {
-			       form.addEventListener('submit', async (e) => {
-				       e.preventDefault();
-				       const formData = new FormData(form);
-				       const data = {};
-				       for (let [key, value] of formData.entries()) {
-					       data[key] = value;
+		       form.addEventListener('submit', async (e) => {
+			       e.preventDefault();
+			       const formData = new FormData(form);
+			       // Build the request body to match the required structure
+			       const data = {
+				       webform_id: 'contact_us',
+			       };
+			       for (let [key, value] of formData.entries()) {
+				       data[key] = value;
+			       }
+			       try {
+				       const response = await fetch('https://dev-xenomedia-nextjs.pantheonsite.io/webform_rest/submit/', {
+					       method: 'POST',
+					       headers: {
+						       'Content-Type': 'application/json',
+					       },
+					       body: JSON.stringify(data),
+				       });
+				       if (response.ok) {
+					       window.location.href = '/thank-you';
+				       } else {
+					       alert('Submission failed. Please try again.');
 				       }
-				       try {
-					       // Replace with your actual endpoint
-					       const response = await fetch('https://dev-xenomedia-nextjs.pantheonsite.io/webform_rest/submit/contact_us', { 
-						       method: 'POST',
-						       headers: {
-							       'Content-Type': 'application/json',
-						       },
-						       body: JSON.stringify(data),
-					       });
-					       if (response.ok) {
-						       window.location.href = '/thank-you';
-					       } else {
-						       alert('Submission failed. Please try again.');
-					       }
-				       } catch (error) {
-					       alert('An error occurred. Please try again.');
-				       }
-			       });
+			       } catch (error) {
+				       alert('An error occurred. Please try again.');
+			       }
+		       });
 		       }
 	       }, 300);
 	});
