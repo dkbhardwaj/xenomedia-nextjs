@@ -187,21 +187,30 @@ export default function ArticleTemplate({
 			}
 		}
 		const actualDate = `${date} ${monthName}, ${year}`;
+		
 		return actualDate;
+		
 	}
+	const imageSrc = blog?.field_meta_tag?.image_src;
+const resolvedImageUrl = imageSrc
+  ? (imageSrc.startsWith('http')
+      ? imageSrc
+      : `https://dev-xenomedia-nextjs.pantheonsite.io${imageSrc}`)
+  : `https://dev-xenomedia-nextjs.pantheonsite.io${imgSrc}`;
 
 	return (
 		<Layout preview={preview} footerMenu={footerMenu} headerMenu={headerMenu}>
 			<Helmet>
+				
 				<meta name="twitter:url" content={`https://www.xenomedia.com/${blog?.path?.langcode}/${blog?.path?.alias}`} />
 				<meta name="twitter:title" content={blog?.field_meta_tag?.title} />
 				{/* This is a JSX comment 
 				<meta name="twitter:image" content={`${(blog?.field_meta_tag?.image_src) == undefined ? `https://www.xenomedia.com/${imgSrc}`: `https://www.xenomedia.com/${blog?.field_meta_tag?.image_src}`}`} />
-				
+
 				url: `${(blog?.field_meta_tag?.image_src) == undefined ? `https://www.xenomedia.com/${imgSrc}`: `https://www.xenomedia.com/${blog?.field_meta_tag?.image_src}`}`,
 					 width: 1200, height: 600, alt: "blog",
 				*/}
-				<meta name="twitter:image" content={`${(blog?.field_meta_tag?.image_src) == undefined ? `${imgSrc}`: `${blog?.field_meta_tag?.image_src}`}`} />
+				<meta name="twitter:image" content={resolvedImageUrl} />
 				<meta name="twitter:image:width" content="1200" />
 				<meta name="twitter:image:height" content="600" />
             </Helmet>
@@ -214,7 +223,7 @@ export default function ArticleTemplate({
 				  images: [ 
 				   {
 					 
-					 url: `${(blog?.field_meta_tag?.image_src) == undefined ? `${imgSrc}`: `${blog?.field_meta_tag?.image_src}`}`,
+					url: resolvedImageUrl,
 					 width: 1200, height: 600, alt: "blog",
 				   }
 					],
