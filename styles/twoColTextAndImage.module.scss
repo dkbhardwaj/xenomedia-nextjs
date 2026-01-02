@@ -1,0 +1,137 @@
+@import './variables';
+
+.twoColTextAndImage {
+
+    .row {
+        position: relative;
+        z-index: 1;
+        display: flex;
+        flex-wrap: wrap;
+        margin: 0;
+        margin-bottom: 50px;
+        gap: 30px;
+
+        &:last-child {
+            margin-bottom: 0;
+        }
+
+        @include tablet-up {
+            margin-bottom: 100px;
+            gap: 50px;
+        }
+
+        &.reverse {
+            @include tablet-up {
+                flex-direction: row-reverse;
+            }
+        }
+    }
+
+    .col {
+        padding: 0;
+        flex: 0 0 100%;
+        max-width: 100%;
+        min-width: 0;
+
+        @include tablet-up {
+            flex: 1 1 0;
+        }
+
+        &.contentColFeatured {
+            @include tablet-up {
+                flex: 0 0 calc(70% - 25px);
+                max-width: calc(70% - 25px);
+            }
+        }
+
+        &.imageColFeatured {
+            @include tablet-up {
+                flex: 0 0 calc(30% - 25px);
+                max-width: calc(30% - 25px);
+            }
+        }
+    }
+
+    .contentBox {
+        position: relative;
+        margin-bottom: 40px;
+
+        @include tablet-up {
+            margin-bottom: 0;
+        }
+
+        h2 {
+            margin-bottom: 40px;
+        }
+
+        h3 {
+            font-size: 24px;
+        }
+    }
+
+    .pattern {
+        position: absolute;
+        width: 1930px;
+        height: 472px;
+        bottom: -350px;
+        z-index: -1;
+        right: -765px;
+        font-size: 0;
+
+        @include desktop-down {
+            display: none;
+        }
+
+        svg {
+            width: 100%;
+            height: 100%;
+            display: block;
+            opacity: 0;
+            transition: opacity 0.2s ease;
+
+            &.anim {
+                opacity: 1;
+
+                .fadein {
+                    opacity: 0;
+                    animation-delay: 0.7s;
+                    animation: fadein 0.7s forwards;
+                }
+
+                .go_anim {
+                    stroke-width: 5;
+                    stroke-dasharray: 1000;
+                    stroke-dashoffset: 1000;
+                    animation-duration: 0.9s;
+                    animation-delay: 0.9s;
+                    animation-name: draw;
+                    animation-fill-mode: forwards;
+
+                    &.line_2 {
+                        stroke-dasharray: 185%;
+                        stroke-dashoffset: 185%;
+                        animation-delay: 1.3s;
+                    }
+                }
+            }
+        }
+    }
+}
+
+@keyframes fadein {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes draw {
+    to {
+        stroke-dashoffset: 0;
+    }
+}

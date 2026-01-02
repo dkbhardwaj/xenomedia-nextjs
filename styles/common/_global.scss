@@ -1297,3 +1297,29 @@ input {
 	}
 
 }
+/** html our process component **/
+.body_text .html-our-process {
+		margin-bottom: 20px;
+		background: $lightGrey;
+		padding: 30px;
+		box-shadow: 15px 15px 0px $bostonBlue;
+
+		h2 {
+				margin-bottom: 30px;
+				font-weight: 800;
+		}
+
+		h4 {
+				color: $atlantisGreen;
+				margin-bottom: 0px;
+		}
+
+		.process-step {
+				margin-bottom: 25px;
+				text-align: left;
+
+				&:last-child {
+						margin-bottom: 0;
+				}
+		}
+}
