@@ -21,53 +21,55 @@ export default function ContactForm(props) {
 	})
 
 	const formhtml = DOMPurify.sanitize(props.data?.attributes?.field_form?.processed);
+	const formType = props.data?.attributes?.field_form_type;
 	const [formVal, setFormVal] = useState("")
 
 	useEffect(() => {
-	       var container = document.createElement("div");
-	       setTimeout(() => {
-		       var container2 = document.querySelector(".dynamicForm");
-		       function decodeEntities(encodedString) {
-			       var textArea = document.createElement('textarea');
-			       textArea.innerHTML = encodedString;
-			       return textArea.value;
-		       }
-		       container2.innerHTML = decodeEntities(formhtml);
-		       var temp = decodeEntities(formhtml);
-		       setFormVal(container2);
+		var container = document.createElement("div");
+		setTimeout(() => {
+			var container2 = document.querySelector(".dynamicForm");
+			function decodeEntities(encodedString) {
+				var textArea = document.createElement('textarea');
+				textArea.innerHTML = encodedString;
+				return textArea.value;
+			}
+			container2.innerHTML = decodeEntities(formhtml);
+			var temp = decodeEntities(formhtml);
+			setFormVal(container2);
 
-		       // Add submission handler to the injected form
-		       const form = container2.querySelector('form');
-		       if (form) {
-		       form.addEventListener('submit', async (e) => {
-			       e.preventDefault();
-			       const formData = new FormData(form);
-			       // Build the request body to match the required structure
-			       const data = {
-				       webform_id: 'contact_us',
-			       };
-			       for (let [key, value] of formData.entries()) {
-				       data[key] = value;
-			       }
-			       try {
-				       const response = await fetch('https://dev-xenomedia-nextjs.pantheonsite.io/webform_rest/submit/', {
-					       method: 'POST',
-					       headers: {
-						       'Content-Type': 'application/json',
-					       },
-					       body: JSON.stringify(data),
-				       });
-				       if (response.ok) {
-					       window.location.href = '/thank-you';
-				       } else {
-					       alert('Submission failed. Please try again.');
-				       }
-			       } catch (error) {
-				       alert('An error occurred. Please try again.');
-			       }
-		       });
-		       }
-	       }, 300);
+			// Add submission handler to the injected form
+			const form = container2.querySelector('form');
+			if (form) {
+				form.addEventListener('submit', async (e) => {
+					e.preventDefault();
+					const formData = new FormData(form);
+					// Build the request body to match the required structure
+					const data = {
+						webform_id: formType === 'ai' ? 'ai_visibility_impact' : 'contact_us',
+					};
+					for (let [key, value] of formData.entries()) {
+						data[key] = value;
+					}
+					console.log(data)
+					try {
+						const response = await fetch('https://dev-xenomedia-nextjs.pantheonsite.io/webform_rest/submit/', {
+							method: 'POST',
+							headers: {
+								'Content-Type': 'application/json',
+							},
+							body: JSON.stringify(data),
+						});
+						if (response.ok) {
+							window.location.href = '/thank-you';
+						} else {
+							alert('Submission failed. Please try again.');
+						}
+					} catch (error) {
+						alert('An error occurred. Please try again.');
+					}
+				});
+			}
+		}, 300);
 	});
 
 
@@ -136,23 +138,23 @@ export default function ContactForm(props) {
 		var body = document.getElementsByTagName("body")[0];
 		var section = document.getElementById("contact_form")
 		var para = section.getElementsByTagName('p')[0];
-		
+
 		(para?.innerText)?.replace(" ' ", "&apos;")
 		setTimeout(() => {
 			// if ((!body.classList.contains("homepage"))) {
-				var pattern = section.getElementsByClassName(Styles.pattern)[0]
+			var pattern = section.getElementsByClassName(Styles.pattern)[0]
 			var largeHeading = section?.getElementsByTagName('h2')[0];
-			
+
 			var heading = (props?.data?.attributes?.field_title)?.split(" ")
-		
-			if(heading?.length >2){
+
+			if (heading?.length > 2) {
 				var text = largeHeading?.innerHTML
 				var smallHeading = document.createElement('h4')
 				smallHeading.innerHTML = title;
 				(largeHeading?.parentNode)?.replaceChild(smallHeading, largeHeading);
 				pattern.style.display = 'none';
 			} else {
-					var largeHeading = section?.getElementsByTagName('h4')[0];
+				var largeHeading = section?.getElementsByTagName('h4')[0];
 				var text = largeHeading?.innerHTML
 				var smallHeading = document.createElement('h2')
 				smallHeading.innerHTML = title;
@@ -161,7 +163,7 @@ export default function ContactForm(props) {
 			}
 			//}
 
-		
+
 		}, "1000");
 
 
@@ -215,7 +217,7 @@ export default function ContactForm(props) {
 							</div>
 						</div>
 						<div className={Styles.col_right}>
-							<div className={Styles.title}>
+							<div className={`${Styles.title} ${formType === 'ai' ? Styles.ai : ''}`}>
 								<h2>{title !== '' ? (title) : `Let's Talk`}</h2>
 								<div className={Styles.pattern}>
 									<svg
