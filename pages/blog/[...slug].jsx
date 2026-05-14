@@ -191,15 +191,21 @@ export default function ArticleTemplate({
 		return actualDate;
 		
 	}
-	// Serve og:image from the front-end origin so the /sites/default/* rewrite
-	// (configured in next.config.js) proxies the asset without Pantheon's
-	// x-robots-tag: noindex header bleeding through.
-	const frontendOrigin = process.env.NEXT_PUBLIC_FRONTEND_URL || 'https://www.xenomedia.com';
+	// og:image, og:url, and canonical must be absolute production URLs.
+	// We hardcode the public domain here because:
+	//   1. NEXT_PUBLIC_FRONTEND_URL in Pantheon is set to the bare .pantheon.site
+	//      hostname (no protocol), which produces invalid OG tags.
+	//   2. Even with a protocol, .pantheon.site URLs are stamped with
+	//      x-robots-tag: noindex at Pantheon's edge — LinkedIn-style crawlers
+	//      can reject those. www.xenomedia.com is the indexable custom domain.
+	// Combined with the /sites/default/* rewrite + X-Robots-Tag override in
+	// next.config.js, this serves images cleanly to social crawlers.
+	const PUBLIC_ORIGIN = 'https://www.xenomedia.com';
 	const rawImagePath = blog?.field_meta_tag?.image_src || imgSrc;
 	const resolvedImageUrl = rawImagePath
-		? `${frontendOrigin}${rawImagePath.replace(/^https?:\/\/[^/]+/, '')}`
+		? `${PUBLIC_ORIGIN}${rawImagePath.replace(/^https?:\/\/[^/]+/, '')}`
 		: '';
-	const canonicalUrl = `${frontendOrigin}/${blog?.path?.langcode}${blog?.path?.alias}`;
+	const canonicalUrl = `${PUBLIC_ORIGIN}/${blog?.path?.langcode}${blog?.path?.alias}`;
 
 	return (
 		<Layout preview={preview} footerMenu={footerMenu} headerMenu={headerMenu}>

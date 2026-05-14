@@ -1,2 +1,2 @@
 deploy-check: 2026-05-14
-build-marker: linkedin-og-fix
+build-marker: linkedin-og-fix-v2-hardcoded-origin
