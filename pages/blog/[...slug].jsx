@@ -191,12 +191,15 @@ export default function ArticleTemplate({
 		return actualDate;
 		
 	}
-	const imageSrc = blog?.field_meta_tag?.image_src;
-const resolvedImageUrl = imageSrc
-  ? (imageSrc.startsWith('http')
-      ? imageSrc
-      : `https://dev-xenomedia-nextjs.pantheonsite.io${imageSrc}`)
-  : `https://dev-xenomedia-nextjs.pantheonsite.io${imgSrc}`;
+	// Serve og:image from the front-end origin so the /sites/default/* rewrite
+	// (configured in next.config.js) proxies the asset without Pantheon's
+	// x-robots-tag: noindex header bleeding through.
+	const frontendOrigin = process.env.NEXT_PUBLIC_FRONTEND_URL || 'https://www.xenomedia.com';
+	const rawImagePath = blog?.field_meta_tag?.image_src || imgSrc;
+	const resolvedImageUrl = rawImagePath
+		? `${frontendOrigin}${rawImagePath.replace(/^https?:\/\/[^/]+/, '')}`
+		: '';
+	const canonicalUrl = `${frontendOrigin}/${blog?.path?.langcode}${blog?.path?.alias}`;
 
 	return (
 		<Layout preview={preview} footerMenu={footerMenu} headerMenu={headerMenu}>
@@ -217,12 +220,13 @@ const resolvedImageUrl = imageSrc
 			<NextSeo
 				title={blog?.field_meta_tag?.title}
 				description={blog?.field_meta_tag?.description}
+				canonical={canonicalUrl}
 				languageAlternates={hrefLang}
-				openGraph={{ type: 'blog detail',title: `${blog?.field_meta_tag?.title}`,
+				openGraph={{ type: 'article', url: canonicalUrl, title: `${blog?.field_meta_tag?.title}`,
 				  description: `${blog?.field_meta_tag?.description}`,
-				  images: [ 
+				  images: [
 				   {
-					 
+
 					url: resolvedImageUrl,
 					 width: 1200, height: 600, alt: "blog",
 				   }

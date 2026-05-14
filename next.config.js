@@ -93,8 +93,25 @@ module.exports = async () => {
 					source: '/confirmation',
 					destination: '/page/confirmation',
 				},
-				
 
+
+			];
+		},
+		async headers() {
+			return [
+				{
+					// Pantheon backend sets x-robots-tag: noindex on .pantheonsite.io /
+					// .pantheon.site responses, which bleeds through the rewrite above.
+					// Override it so social crawlers (LinkedIn, Facebook, etc.) will
+					// fetch and display og:image assets proxied from the CMS.
+					source: '/sites/default/:path*',
+					headers: [
+						{
+							key: 'X-Robots-Tag',
+							value: 'all',
+						},
+					],
+				},
 			];
 		},
 		async redirects() {
